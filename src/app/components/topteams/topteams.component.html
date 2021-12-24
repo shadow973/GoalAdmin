@@ -1,0 +1,32 @@
+<div class="page-header">
+    <h1 _ngcontent-unf-43="">
+        Top Teams
+    </h1>
+    <div class="page-actions ml-auto">
+        <button class="btn btn-primary btn--raised"  [routerLink]="['/top-teams/add']" >Add Top Team</button>
+    </div>
+    </div>
+    <div class="top-teams js-sortable ui-sortable">
+    <!--template bindings={}-->
+    <div class="top-team js-sortable-item"  *ngFor="let team of TeamsData" data-item-id="20">
+        <div class="top-team__image">
+            <img src="//storage.setanta.ge/{{team.tag.image}}">
+        </div>
+        <div class="top-team__title">
+            {{team.tag.title}}
+        </div>
+        <div class="top-team__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+            <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button" [routerLink]="['/top-teams/',  team.id ]">
+                Edit
+                </button>
+                <button class="dropdown-item" type="button" (click)="delete( team.id )">
+                Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

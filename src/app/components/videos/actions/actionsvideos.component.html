@@ -1,0 +1,76 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Video / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+            <div class="form-group">
+                <label for="name">Title</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="title" value="{{ItemData.title}}">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Video</label>
+                <div class="album-uploader">
+                    <div class="d-flex">
+                        <input accept="video/*" class="form-control album-uploader__file" multiple="" name="video" type="file">
+                        <img src="/assets/img/trns-loader.gif" class="video-loader" [ngClass]="{'active': showLoader}">
+                        <button class="btn btn-primary album-uploader__upload-btn" type="button" (click)="uploaVideo($event)">Upload</button>
+                        <button class="btn btn-secondary album-uploader__upload-btn" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+          <div class="form-group">
+            <label for="name">Video URL</label>
+            <input class="form-control ng-untouched ng-pristine ng-valid" name="video_url" value="{{ItemData.video_url}}">
+            <input type="hidden" class="form-control ng-untouched ng-pristine ng-valid" name="video_id" value="{{ItemData.video_id}}">
+          </div>
+
+          <div class="form-group">
+            <label for="ad_url">AD URL</label>
+            <input class="form-control ng-untouched ng-pristine ng-valid" name="ad_url" value="{{ItemData.ad_url}}">
+          </div>
+
+          <div class="form-group">
+                <label>Image </label>
+                <app-image-uploader>
+                    <div class="image-uploader">
+                        <div class="material-icons image-uploader__bg">add_a_photo</div>
+                        <input name="video_img_file" type="file">
+                        <div class="image-uploader__image image" [ngStyle]="{ 'background-image': 'url(http://storage.goal.ge/' + ItemData.video_img + ')'}"></div>
+                    </div>
+                </app-image-uploader>
+            </div>
+            <div class="form-group">
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="video_img" value="{{ItemData.video_img}}">
+            </div>
+
+            <div class="form-group">
+                <label>
+                    ShortCode
+                </label>
+                <textarea class="form-control ng-untouched " name="embed" value="{{ItemData.embed}}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    ShortCode
+                </label>
+                <input class="form-control ng-untouched " style="cursor: text;" disabled value='[type="video" id="{{ id !== "add" ? id : "" }}"]'>
+            </div>
+
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/videos']" type="button">
+                    Go Back
+                </button>
+                <img src="/assets/img/trns-loader.gif" class="save-loader" [ngClass]="{'active': saveLoader}">
+            </div>
+        </form>
+    </div>
+</div>

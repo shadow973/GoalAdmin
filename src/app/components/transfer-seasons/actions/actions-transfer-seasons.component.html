@@ -1,0 +1,27 @@
+<div>
+        <div class="page-header">
+            <h1>
+              სატრანსფერო სეზონები / {{ItemData.name}} / რედაქტირება
+            </h1>
+        </div>
+        <div class="block block--padded">
+            <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+                <div *ngIf="id != 'add'">
+                    <input name="_method" type="hidden" value="PATCH">
+                </div>
+                <!--template bindings={}-->
+              <div class="form-group">
+                <label for="name">დასახელება</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="name" name="name" type="text" value="{{ItemData.name}}">
+              </div>
+                <div class="form-group mb-0">
+                    <button class="btn btn-primary" type="submit">
+                        შენახვა
+                    </button>
+                    <button class="btn btn-secondary" [routerLink]="['/transfer-seasons']" type="button">
+                        დაბრუნება
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>

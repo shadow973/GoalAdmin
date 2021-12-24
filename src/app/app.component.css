@@ -1,0 +1,10 @@
+.content {
+    position: absolute;
+    top: 60px;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    overflow-y: auto; }
+.content.hidden {
+    left: 0px; }

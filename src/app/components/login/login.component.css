@@ -1,0 +1,21 @@
+.auth {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; 
+}
+
+.auth__form {
+      width: 300px;
+      padding: 20px;
+      background-color: #fff;
+      -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+}

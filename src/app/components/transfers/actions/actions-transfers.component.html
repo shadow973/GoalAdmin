@@ -1,0 +1,90 @@
+<div>
+        <div class="page-header">
+            <h1>
+              <a [routerLink]="['/transfer-seasons/']">სატრანსფერო სეზონები</a> /
+              <a [routerLink]="['/transfer-seasons/'+seasonId+'/transfers']">{{ItemData.name}}</a>
+              / რედაქტირება
+            </h1>
+        </div>
+        <div class="block block--padded">
+            <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+                <div *ngIf="id != 'add'">
+                    <input name="_method" type="hidden" value="PATCH">
+                </div>
+                <!--template bindings={}-->
+              <div class="form-group PlayerRelative">
+                <label for="player_id">ფეხბურთელი</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" type="text"
+                       value="{{ItemData.player?.common_name}}" (keyup)="searchPlayer($event)" placeholder="Search Player">
+                <div *ngIf="PlayersData.length" class="PlayersDiv">
+                  <div class="player-item" *ngFor="let pl of PlayersData"
+                       (click)="selectPlayer(pl)">{{pl.common_name}}</div>
+                </div>
+              </div>
+              <div class="form-group PlayerRelative">
+                <label for="from_team">გუნდი (საიდან გადავიდა)</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" type="text"
+                       value="{{ItemData.from_team?.name}}" (keyup)="searchTeam($event, 'from')" placeholder="Search Team">
+                <div *ngIf="TeamsData.data && TeamsData.data.length && direction == 'from'" class="PlayersDiv">
+                  <div class="player-item" *ngFor="let pl of TeamsData.data" (click)="selectTeam(pl, 'from')">
+                    {{pl.name}}</div>
+                </div>
+              </div>
+              <div class="form-group PlayerRelative">
+                <label for="to_team">გუნდი (სად გადავიდა)</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" type="text"
+                       value="{{ItemData.to_team?.name}}" (keyup)="searchTeam($event, 'to')" placeholder="Search Team">
+                <div *ngIf="TeamsData.data && TeamsData.data.length && direction == 'to'" class="PlayersDiv">
+                  <div class="player-item" *ngFor="let pl of TeamsData.data" (click)="selectTeam(pl, 'to')">
+                    {{pl.name}}</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="transfer_price">ფასი</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="transfer_price" name="transfer_price"
+                       [(ngModel)]="ItemData.transfer_price"
+                       [ngModelOptions]="{standalone: true}"
+                       type="text" value="{{ItemData.transfer_price}}">
+              </div>
+              <div class="form-group">
+                <label for="transfer_season">სატრანსფერო სეზონი</label>
+<!--                <ng-multiselect-dropdown [placeholder]="'აირჩიეთ სატრანსფერო სეზონი'" [data]="SeasonsData"-->
+<!--                                         [(ngModel)]="ItemData.transfer_season_id" [settings]="dropdownSettingsSeason"-->
+<!--                                         [ngModelOptions]="{standalone: true}">-->
+<!--                </ng-multiselect-dropdown>-->
+                <select class="form-control" [(ngModel)]="ItemData.transfer_season_id" [ngModelOptions]="{standalone: true}">
+                  <option [selected]="(!ItemData.transfer_season_id || ItemData.transfer_season_id == seasonId) && seasonId == s.id" *ngFor="let s of SeasonsData" [value]="s.id">
+                    {{s.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="league_id">ლიგები</label>
+                <ng-multiselect-dropdown [placeholder]="'აირჩიეთ ლიგა'" [data]="LeagueData"
+                                         [(ngModel)]="ItemData.leagues" [settings]="dropdownSettingsLeague"
+                                         [ngModelOptions]="{ standalone: true } ">
+                </ng-multiselect-dropdown>
+              </div>
+<!--              <div class="form-group">-->
+<!--                <label for="status">ტრანსფერის სტატუსი</label>-->
+<!--                <select class="form-control" [(ngModel)]="ItemData.status" [ngModelOptions]="{standalone: true}">-->
+<!--                  <option *ngFor="let s of StatusData" [value]="s">-->
+<!--                    {{s}}-->
+<!--                  </option>-->
+<!--                </select>-->
+<!--              </div>-->
+                <div class="form-check form-check-inline ml-4">
+                  <input class="form-check-input" type="checkbox" name="top_transfer" id="inlineRadio3" (change)="onIsTopChange($event)" [checked]="ItemData.top_transfer_order > 0 == true" value="1">
+                  <label class="form-check-label" for="inlineRadio3">ტოპ ტრანსფერი</label>
+                </div>
+                <div class="form-group mb-0">
+                    <button class="btn btn-primary" type="submit">
+                        შენახვა
+                    </button>
+                    <button class="btn btn-secondary" [routerLink]="['/transfer-seasons/'+seasonId+'/transfers']" type="button">
+                        დაბრუნება
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>

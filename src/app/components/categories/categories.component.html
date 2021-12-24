@@ -1,0 +1,143 @@
+<div class="content">
+    <div>
+        <div class="page-header">
+            <h1>
+                Categories
+            </h1>
+            <div class="page-actions ml-auto">
+                <a style="margin-right:5px;" href="{{apiurl}}categories/export">
+                    <button class="btn btn-primary">Export</button>
+                </a>
+                <button class="btn btn-primary btn--raised" [routerLink]="['/categories/add' ]" routerlink="/categories/add">Add Category</button>
+                <!-- <button class="btn btn-success btn--raised" routerlink="/categories/reorder">Reorder</button> -->
+            </div>
+        </div>
+        <div class="categories" *ngIf="CategoriesData.length">
+            <div class="categories__header">
+                <div class="categories__title">
+                    Title
+                </div>
+                <div class="categories__articles">
+                    Articles Count
+                </div>
+                <div class="categories__users">
+                    Users Count
+                </div>
+                <div class="categories__actions">
+                    Actions
+                </div>
+            </div>
+            <!--template bindings={}-->
+            <div *ngFor="let catp of CategoriesData">
+                <div>
+                    <div class="category">
+                        <div class="category__main">
+                            <div style="width:60%; display:flex; align-items: center;">
+
+                                <div class="category__title">
+                                    <a [routerLink]="['/categories/',  catp.id ]" href="/categories/{{catp.id }}">{{ catp.title }}</a>
+                                </div>
+                            </div>
+                            <div class="category__articles">
+                                {{ catp.articles_count }}
+                            </div>
+                            <div class="category__users">
+                                {{ catp.users_count }}
+                            </div>
+                            <div class="category__actions">
+                                <button class="btn btn--transparent btn--flex" (click)="activeActions($event)" type="button">
+                                            <i class="material-icons">more_vert</i>
+                                        </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <button [routerLink]="['/categories/',  catp.id ]" class="dropdown-item" type="button">
+                                                Edit
+                                            </button>
+                                    <button class="dropdown-item" type="button" (click)="delete(catp.id)">
+                                                Delete
+                                            </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category__children" *ngFor="let catc of catp.children">
+                            <div>
+                                <div>
+                                    <div class="category">
+                                        <div class="category__main">
+                                            <div style="width:60%; display:flex; align-items: center;">
+                                                <div class="category__space">
+                                                    ----
+                                                </div>
+                                                <div class="category__title">
+                                                    <a [routerLink]="['/categories/',  catc.id ]" href="/categories/{{catc.id }}">{{ catc.title }}</a>
+                                                </div>
+                                            </div>
+                                            <div class="category__articles">
+                                                {{ catc.articles_count }}
+                                            </div>
+                                            <div class="category__users">
+                                                {{ catc.users_count }}
+                                            </div>
+                                            <div class="category__actions">
+                                                <button class="btn btn--transparent btn--flex" (click)="activeActions($event)" data-toggle="dropdown" type="button">
+                                            <i class="material-icons">more_vert</i>
+                                        </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <button [routerLink]="['/categories/',  catc.id ]" class="dropdown-item" type="button">
+                                                Edit
+                                            </button>
+                                                    <button class="dropdown-item" type="button" (click)="delete(catc.id)">
+                                                Delete
+                                            </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="category__children" *ngFor="let catcc of catc.children">
+                                            <div>
+                                                <div class="category">
+                                                    <div class="category__main">
+                                                        <div style="width:60%; display:flex; align-items: center;">
+                                                            <div class="category__space">
+                                                                ---- ----
+                                                            </div>
+                                                            <div class="category__title">
+                                                                <a [routerLink]="['/categories/',  catcc.id ]" href="/categories/{{catcc.id }}">{{ catcc.title }} </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="category__articles">
+                                                            {{ catcc.articles_count }}
+                                                        </div>
+                                                        <div class="category__users">
+                                                            {{ catcc.users_count }}
+                                                        </div>
+                                                        <div class="category__actions">
+                                                            <button class="btn btn--transparent btn--flex" (click)="activeActions($event)" data-toggle="dropdown" type="button">
+                                                        <i class="material-icons">more_vert</i>
+                                                    </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <button [routerLink]="['/categories/',  catcc.id ]" class="dropdown-item" type="button">
+                                                            Edit
+                                                        </button>
+                                                                <button class="dropdown-item" type="button" (click)="delete(catcc.id)">
+                                                            Delete
+                                                        </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

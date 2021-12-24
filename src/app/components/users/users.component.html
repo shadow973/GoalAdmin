@@ -1,0 +1,84 @@
+<div class="page-header">
+    <h1>
+        Users
+    </h1>
+    <div class="page-actions ml-auto">
+        <a style="margin-right:5px;" href="//api.setanta.ge/api/users/export?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQsImlzcyI6Imh0dHA6Ly9hcGkuc2V0YW50YS5nZS9hcGkvbG9naW4vcmVmcmVzaF90b2tlbiIsImlhdCI6MTUzNzQ1MDM2NiwiZXhwIjoxNTM3NzgzMTY3LCJuYmYiOjE1Mzc2OTY3NjcsImp0aSI6ImlOOFZMOFNmYVJsVWdHSVMifQ.HbFNwoYl3wWUvq30NMF4l7Iw8F6LuUnFvAu6xiaJJb4">
+        </a>
+        <button class="btn btn-primary" (click)="exportData()">Export</button>
+    </div>
+</div>
+<form class="filters ng-untouched ng-pristine ng-valid">
+    <div class="form-group">
+        <div class="row">
+            <div class="col col-6">
+                <label for="input_q">Name, username</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="input_q" name="q" placeholder="Search..." type="text">
+            </div>
+            <div class="col col-6">
+                <label for="input_role_id">Role</label>
+                <select class="form-control ng-untouched ng-pristine ng-valid" id="input_role_id" name="role_id">
+                        <option value="">All</option>
+                        <option value="1">
+                            User
+                        </option><option value="2">
+                            Journalist
+                        </option><option value="3">
+                            Content Manager
+                        </option><option value="4">
+                            Administrator
+                        </option><option value="5">
+                            CyberSport Admin
+                        </option>
+                    </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input class="btn btn-secondary" type="submit" value="Filter">
+    </div>
+</form>
+<div class="users">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <th>subscribed tags</th>
+                <th>subscribed categories</th>
+                <th>email</th>
+                <th>action</th>
+            </tr>
+            <tr class="user" *ngFor="let user of UsersData">
+                <td width="30%">
+                    <div class="user__title">
+                        {{user.username}}
+                    </div>
+                </td>
+                <td width="20%">
+                    {{user.tag_subscriptions_count}}
+                </td>
+                <td width="20%">
+                    {{user.category_subscriptions_count}}
+                </td>
+                <td width="20%">
+                    {{user.email}}
+                </td>
+                <td width="10%">
+                    <div class="user__actions">
+                        <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button" [routerLink]="['/users/',  user.id ]">
+                            Edit
+                        </button>
+                            <button class="dropdown-item" type="button">
+                            Delete
+                        </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

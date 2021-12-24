@@ -1,0 +1,32 @@
+<div class="page-header">
+    <h1> 
+        Home Categories
+    </h1>
+    <div class="page-actions ml-auto">
+        <button class="btn btn-primary btn--raised" [routerLink]="['/home-categories/add']" >Add Home Category</button>
+    </div>
+</div>
+<div class="home-categories js-sortable ui-sortable" >
+    <div class="home-category js-sortable-item" *ngFor="let catp of CategoriesData"  >
+            <!-- data-item-id="{{ catp.category.id }}" -->
+        <div class="home-category__image">            
+            <img src="//storage.setanta.ge/{{catp.category.image}}">
+        </div>
+        <div class="home-category__title">
+            {{ catp.category.title }}
+        </div>
+        <div class="home-category__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button" [routerLink]="['/home-categories/',  catp.id ]">
+                    Edit
+                </button>
+                <button class="dropdown-item" type="button" (click)="delete(catp.id)">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

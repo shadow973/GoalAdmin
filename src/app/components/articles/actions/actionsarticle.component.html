@@ -1,0 +1,268 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Articles / {{ItemData.title}} / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid row" id="articleForm" (submit)="saveItem($event)">
+            <div *ngIf="id != 'add'">
+                <input name="_method" type="hidden" value="PATCH">
+            </div>
+
+            <!-- <ng-multiselect-dropdown
+                [placeholder]="'custom placeholder'"
+                [data]="CategoriesData"
+                [(ngModel)]="ItemData.categories"
+                [settings]="dropdownSettingsTest"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                [ngModelOptions]="{standalone: true}"
+                >
+            </ng-multiselect-dropdown> -->
+          <div class="col-12">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input class="form-control ng-untouched ng-pristine ng-valid" id="title" name="title" type="text"
+                     value="{{ItemData.title}}">
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="categories">Categories</label>
+              <ng-multiselect-dropdown [placeholder]="'აირჩიეთ კატეგორია'" [data]="CategoriesData"
+                                       [(ngModel)]="ItemData.categories" [settings]="dropdownSettingsCats"
+                                       (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                                       [ngModelOptions]="{standalone: true}">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <label class="custom-control custom-checkbox gallery-uploader__checkbox">
+                <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="is_pinned"
+                       type="checkbox" [checked]="ItemData.is_pinned">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Pin news (for 24 hour)</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <label>Main Image</label>
+              <app-gallery-uploader>
+                <div class="gallery-uploader">
+                  <div class="gallery-uploader__preview" *ngIf="mainimg">
+                    Uploaded image will appear here.
+                    <img src="//storage.goal.ge/uploads/posts/{{ mainimg }}">
+                  </div>
+                  <div class="d-flex">
+                    <input class="form-control gallery-uploader__file" name="file" type="file">
+                    <button class="btn btn-primary gallery-uploader__upload-btn"
+                            (click)="uploadGalleryItem($event)" type="button">Upload</button>
+                    <button class="btn btn-secondary gallery-uploader__upload-btn" type="button">Cancel</button>
+                  </div>
+                </div>
+              </app-gallery-uploader>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <label>Main Video</label>
+              <div class="d-flex">
+                <input class="form-control mr-2 ng-untouched ng-pristine ng-valid" id="main_video" name="main_video"
+                       type="text" value="{{ItemData.main_video}}">
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <modal-standings-component [leagues]="LeaguesData" (added)="onStandingsModalClosed($event)"></modal-standings-component>
+              <modal-goalscorers-component [leagues]="LeaguesData" (added)="onGoalscorerModalClosed($event)"></modal-goalscorers-component>
+              <modal-results-component (added)="onMatchResultModalClosed($event)"></modal-results-component>
+            </div>
+            <!--            <modal-upload-video></modal-upload-video>-->
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label for="content">Content</label>
+              <!-- <textarea name="content" style=""></textarea> -->
+              <ck-editor [config]="editorConfig" name="content" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="false">
+              </ck-editor>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-group">
+              <label for="insertArticle" class="font-weight-bold">სტატიის ჩალინკვა</label>
+              <label class="custom-control custom-checkbox gallery-uploader__checkbox d-block">
+                <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="link_with_image"
+                       type="checkbox" [(ngModel)]="insertArticleItemWithPic">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">ჩაილინკოს სურათით</span>
+              </label>
+              <ng-multiselect-dropdown id="insertArticle" name="articleItem" [(ngModel)]="insertArticleItem"  [placeholder]="'მოძებნეთ სტატია'" [data]="ArticlesData"
+                                       [settings]="dropdownSettingsArticle"
+                                       (onSelect)="onArticleSelect($event)"
+                                       (onFilterChange)="onArticleFilterChange($event)">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <label>Match ID</label>
+              <div class="d-flex">
+                <input class="form-control mr-2 ng-untouched ng-pristine ng-valid" id="match_id" name="match_id"
+                       type="text" value="{{ItemData.match_id}}">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <label>ჰეშტეგები</label>
+                <tag-input style="margin-top: -6px;"
+                           name="hashtags"
+                           [theme]="'minimal'"
+                           [placeholder]="'+დაამატეთ'"
+                           [modelAsStrings]="true"
+                           [(ngModel)]="ItemData.hashtags"
+                           [clearOnBlur]="true">
+                  <tag-input-dropdown [focusFirstElement]="true" [autocompleteItems]="hashtagData">
+                  </tag-input-dropdown>
+                </tag-input>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group PlayerRelative">
+              <label for="category_id">Teams</label>
+              <ng-container *ngIf="ItemData.teams">
+                <div class="related-items-list" *ngIf="ItemData.teams.length">
+                  <div class="related-item" *ngFor="let pl of ItemData.teams; let i = index;">{{pl.name}} <div
+                    class="related-item-remove" (click)="removeTeam(i)">X</div>
+                  </div>
+                </div>
+              </ng-container>
+              <input class="form-control ng-untouched ng-pristine ng-valid" type="text"
+                     value="" (keyup)="searchTeam($event)" placeholder="Search Team">
+              <div *ngIf="TeamsData.data && TeamsData.data.length" class="PlayersDiv">
+                <div class="player-item" *ngFor="let pl of TeamsData.data" (click)="selectTeam(pl.team_id,pl.name)">
+                  {{pl.name}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <label for="tags">Leagues</label>
+
+              <ng-multiselect-dropdown [placeholder]="'select Leagues'" [data]="LeaguesData"
+                                       [(ngModel)]="ItemData.leagues" [settings]="dropdownSettingsLeagues"
+                                       (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                                       [ngModelOptions]="{standalone: true}">
+              </ng-multiselect-dropdown>
+
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group PlayerRelative">
+              <label for="category_id">Player</label>
+              <div class="related-items-list" *ngIf="ItemData.players && ItemData.players.length">
+                <div class="related-item" *ngFor="let pl of ItemData.players; let i = index;">{{pl.fullname}} <div
+                  class="related-item-remove" (click)="removePlayer(i)">X</div>
+                </div>
+              </div>
+              <input class="form-control ng-untouched ng-pristine ng-valid" type="text"
+                     value="{{ItemData.player_name}}" (keyup)="searchPlayer($event)" placeholder="Search Player">
+              <div *ngIf="PlayersData.length" class="PlayersDiv">
+                <div class="player-item" *ngFor="let pl of PlayersData"
+                     (click)="selectPlayer(pl.player_id,pl.fullname)">{{pl.fullname}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-3">
+            <div class="form-group">
+              <label for="status">ტრანსფერის სტატუსი</label>
+              <select name="transfer_status" class="form-control" [(ngModel)]="ItemData.transfer_status">
+                <option *ngFor="let s of StatusData" [value]="s">
+                  {{s}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <div><label>Watermark</label></div>
+              <div class="form-inline">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="watermark" id="inlineRadio1" (change)="onWatermarkChange($event)" [checked]="ItemData.watermark == 'hidden'" value="hidden">
+                  <label class="form-check-label" for="inlineRadio1">Watermark-ის გარეშე</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="watermark" id="inlineRadio2" (change)="onWatermarkChange($event)" [checked]="ItemData.watermark == 'top'" value="top">
+                  <label class="form-check-label" for="inlineRadio2">ზევით</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="watermark" id="inlineRadio3" (change)="onWatermarkChange($event)" [checked]="ItemData.watermark == 'bottom'" value="bottom">
+                  <label class="form-check-label" for="inlineRadio3">ქვევით</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="form-group" style="position: relative;">
+              <label for="publish_date">Publish Date</label>
+              <input class="form-control" id="publish_date" bsDatePicker type="date">
+
+              <!-- <dl-date-time-picker></dl-date-time-picker> -->
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="form-group">
+              <label class="custom-control custom-checkbox gallery-uploader__checkbox">
+                <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="is_draft"
+                       type="checkbox" [checked]="ItemData.is_draft">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Is Draft?</span>
+              </label>
+            </div>
+          </div>
+
+
+
+
+<!--            <div class="row">-->
+<!--                <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="tags">Tags</label>-->
+
+<!--                        <ng-multiselect-dropdown [placeholder]="'აირჩიეთ თეგები'" [data]="TagsData"-->
+<!--                            [(ngModel)]="ItemData.tags" [settings]="dropdownSettingsCats"-->
+<!--                            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"-->
+<!--                            [ngModelOptions]="{standalone: true}">-->
+<!--                        </ng-multiselect-dropdown>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+
+            <div class="col-12">
+              <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit" [disabled]="saveLoader ? 'disabled' : null">
+                  Save
+                </button>
+                <!-- <button class="btn btn-primary" style="z-index:10000;" type="button">
+                    Preview
+                </button> -->
+                <button class="btn btn-secondary" [routerLink]="['/articles/']" type="button"
+                        style="margin-left: 10px;">
+                  Go Back
+                </button>
+                <img src="/assets/img/trns-loader.gif" class="save-loader" [ngClass]="{'active': saveLoader}">
+              </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="child_overlay" hidden=""></div>

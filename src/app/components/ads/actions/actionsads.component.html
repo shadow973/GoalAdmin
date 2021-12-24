@@ -1,0 +1,79 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Ads / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+            <!-- <input name="_method" type="hidden" value="PATCH"> -->
+
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" class="form-control ng-untouched ng-pristine ng-valid" name="title" value="{{ItemData.title}}">
+          </div>
+<!--
+          <div class="form-group">
+            <label for="max_view_count">Max View Count</label>
+            <input type="number" id="max_view_count" class="form-control ng-untouched ng-pristine ng-valid" name="max_view_count" value="{{ItemData.max_view_count}}">
+          </div>-->
+
+            <div class="form-group">
+                <label for="category_id">Positions</label>
+                <select class="form-control ng-untouched" id="position_id" name="position_id" tabindex="-1">
+                    <option *ngFor="let item of PositionsData" value="{{item.id}}" [selected]="item.id == ItemData.position_id">{{item.title}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="category_id">iFrame</label>
+                <textarea class="form-control" name="iframe">{{ItemData.iframe}}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Image </label>
+                <app-image-uploader>
+                    <div class="image-uploader">
+                        <div class="material-icons image-uploader__bg">add_a_photo</div>
+                        <input name="image_new" type="file">
+                        <div class="image-uploader__image image" [ngStyle]="{ 'background-image': 'url(' + ItemData.bck_image + ')'}"></div>
+                    </div>
+                </app-image-uploader>
+            </div>
+            <div class="form-group">
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="image" value="{{ItemData.image}}">
+            </div>
+            <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input ng-untouched ng-pristine ng-valid" value="1" name="delete_image"
+                        type="checkbox">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Delete Image</span>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="category_id">Banner Url</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="ads_url" value="{{ItemData.ads_url}}">
+            </div>
+
+            <div class="form-group">
+              <label class="custom-control custom-checkbox gallery-uploader__checkbox">
+                <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="is_visible"
+                       type="checkbox" [checked]="ItemData.is_visible">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Is Visible</span>
+              </label>
+            </div>
+
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/ads']" type="button">
+                    Go Back
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

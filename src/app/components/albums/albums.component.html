@@ -1,0 +1,33 @@
+<div class="page-header">
+    <h1 _ngcontent-sdk-47="">
+        Photo Gallery
+    </h1>
+    <div class="page-actions ml-auto">
+        <button class="btn btn-primary btn--raised" [routerLink]="['/albums/add']" routerlink="/albums/add">Add Album</button>
+    </div>
+</div>
+<div class="albums js-sortable">
+    <div class="album js-sortable-item" data-item-id="7" *ngFor="let album of AlbumsData">
+        <div class="album__image">
+            <div>
+                <img src="//storage.goal.ge/{{album.gallery_items[0].filename_preview}}">
+            </div>
+        </div>
+        <div class="album__title">
+            {{album.title}}
+        </div>
+        <div class="album__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button" [routerLink]="['/albums/',  album.id ]">
+                    Edit
+                </button>
+                <button class="dropdown-item" type="button">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

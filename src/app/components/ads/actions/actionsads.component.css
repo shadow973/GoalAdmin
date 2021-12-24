@@ -1,0 +1,49 @@
+.image-uploader {
+    width: 128px;
+    height: 128px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-uploader__bg {
+    border: dashed 2px #EEEEEE;
+    width: 128px;
+    height: 128px;
+    background-color: #FAFAFA;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #777;
+    font-size: 48px;
+}
+
+.image-uploader [type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.image-uploader [type=file]::-webkit-file-upload-button {
+    cursor: pointer;
+}
+
+.image-uploader__image {
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+}

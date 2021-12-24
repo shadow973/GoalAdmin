@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h1 _ngcontent-unf-43="">
+        Ads
+    </h1>
+    <div class="page-actions ml-auto">
+        <button class="btn btn-primary btn--raised" [routerLink]="['/ads/add']">Add New</button>
+    </div>
+</div>
+<div class="listing-items js-sortable ui-sortable">
+    <!--template bindings={}-->
+    <div class="listing-item js-sortable-item">
+      <div class="listing-item__title">
+        Title
+      </div>
+      <!--<div class="listing-item__title">
+        View Count
+      </div>-->
+      <div class="listing-item__actions">
+        Actions
+      </div>
+    </div>
+    <div class="listing-item js-sortable-item" *ngFor="let item of ItemsData" data-item-id="20">
+
+      <div class="listing-item__title">
+        {{item.title}}
+      </div>
+      <!--<div [class]="item.view_count >= item.max_view_count ? 'listing-item__title text-danger' : 'listing-item__title'">
+        {{item.view_count}}/{{item.max_view_count}}
+      </div>-->
+        <div class="listing-item__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <!--<button class="dropdown-item" type="button" (click)="resetViewCount(item.id)">
+                Reset View Count
+              </button>-->
+              <button class="dropdown-item" type="button" [routerLink]="['/ads/',  item.id ]">
+                Edit
+              </button>
+                <button class="dropdown-item" type="button" (click)="delete(item.id)">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="page-header">
+    <h1 _ngcontent-unf-43="">
+        Livescore widget status
+    </h1>
+    <div class="page-actions ml-auto">
+        <!-- <button class="btn btn-primary btn--raised" [routerLink]="['/ads/add']">Add New</button> -->
+    </div>
+</div>
+<div class="listing-items params-body">
+    <!--template bindings={}-->
+    <select class="form-control ng-untouched ng-pristine ng-valid" (change)="livescoreChange($event.target.value)">
+            <option *ngFor="let itm of LivescoreStatuses" [value]="itm.value" [selected]="itm.value == LivescoreStatus">{{itm.label}}</option>
+    </select>
+</div>
+
+<div class="page-header">
+    <h1 _ngcontent-unf-43="">
+        Sidebar
+    </h1>
+    <div class="page-actions ml-auto">
+        <!-- <button class="btn btn-primary btn--raised" [routerLink]="['/ads/add']">Add New</button> -->
+    </div>
+</div>
+<div class="listing-items js-sortable ui-sortable">
+    <!--template bindings={}-->
+    <div class="listing-item js-sortable-item" *ngFor="let item of ItemsData; let i = index" data-item-id="20">
+        <div class="listing-item__title">
+            {{item.name}}
+        </div>
+        <div class="listing-item__actions">
+            <button class="btn btn-primary btn--raised" (click)="itemMove(i,'up')"><i
+                    class="material-icons">keyboard_arrow_up</i></button>
+            &nbsp;
+            <button class="btn btn-primary btn--raised" (click)="itemMove(i,'down')"><i
+                    class="material-icons">keyboard_arrow_down</i></button>
+        </div>
+    </div>
+</div>

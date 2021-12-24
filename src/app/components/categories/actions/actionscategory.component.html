@@ -1,0 +1,84 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Categories / ჩემპიონატები / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveCategory($event)">
+            <div *ngIf="id != 'add'">
+                <input name="_method" type="hidden" value="PATCH">
+            </div>
+            
+            <!--template bindings={}-->
+            <div class="form-group">
+                <label for="category">Title</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="title" name="title" type="text" value="{{ CategoryData.title }}">
+            </div>
+            <div class="form-group">
+                <label for="parent_id">Parent Category</label>
+                <select class="form-control ng-untouched ng-pristine ng-valid" id="parent_id" name="parent_id">
+                    <option *ngFor="let c of CategoriesData" value="{{c.id}}" [selected]="CategoryData.parent_id == c.id">{{c.title}}</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="is_visible" value="1"
+                        type="checkbox" [checked]="CategoryData.is_visible">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Is Visible</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Image </label>
+                <app-image-uploader _nghost-ont-27="">
+                    <div _ngcontent-ont-27="" class="image-uploader">
+                        <div _ngcontent-ont-27="" class="material-icons image-uploader__bg">add_a_photo</div>
+                        <input _ngcontent-ont-27="" name="image_new" type="file">
+                        <div _ngcontent-ont-27="" class="image-uploader__image image" [ngStyle]="{ 'background-image': 'url(' + CategoryData.image + ')'}"></div>
+                    </div>
+                </app-image-uploader>
+            </div>
+            <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input ng-untouched ng-pristine ng-valid" value="1" name="delete_image"
+                        type="checkbox">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Delete Image</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="category">Color</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" style="width: 100px; height: 100px;" id="color" name="color" type="color" value="{{ CategoryData.color }}">
+            </div>
+            <!-- <div class="form-group">
+                <label>Background Image</label>
+                <app-image-uploader _nghost-ont-27="">
+                    <div _ngcontent-ont-27="" class="image-uploader">
+                        <div _ngcontent-ont-27="" class="material-icons image-uploader__bg">add_a_photo</div>
+                        <input _ngcontent-ont-27="" name="background_image_new" type="file">
+                        <div _ngcontent-ont-27="" class="image-uploader__image image" [ngStyle]="{ 'background-image': 'url(' + CategoryData.background_image + ')'}"></div>
+                    </div>
+                </app-image-uploader>
+            </div>
+            <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input ng-untouched ng-pristine ng-valid" value="1" name="delete_background_image"
+                        type="checkbox">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Delete Background Image</span>
+                </label>
+            </div> -->
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/categories/']" type="button">
+                    Go Back
+                </button>
+                <img src="/assets/img/trns-loader.gif" class="save-loader" [ngClass]="{'active': saveLoader}">
+            </div>
+        </form>
+    </div>
+</div>

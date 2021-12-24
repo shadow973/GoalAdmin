@@ -1,0 +1,29 @@
+<div class="page-header">
+    <h1>
+        Video Gallery
+    </h1>
+    <div class="page-actions ml-auto">
+        <button class="btn btn-primary btn--raised" [routerLink]="['/videos/add']">Add Video</button>
+    </div>
+</div>
+<div class="videos js-sortable">
+    <div class="video js-sortable-item" data-item-id="14251" *ngFor="let item of VideosData">
+
+        <div class="video__title">
+            {{ item.title }}
+        </div>
+        <div class="video__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                <i  class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button" [routerLink]="['/videos/',  item.id ]">
+                    Edit
+                </button>
+                <button class="dropdown-item" type="button">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

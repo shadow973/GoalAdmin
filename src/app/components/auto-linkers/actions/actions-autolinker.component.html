@@ -1,0 +1,42 @@
+<div>
+        <div class="page-header">
+            <h1>
+              ავტომატური გალინკვის ტექსტები / {{ItemData.word}} / რედაქტირება
+            </h1>
+        </div>
+        <div class="block block--padded">
+            <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+                <div *ngIf="id != 'add'">
+                    <input name="_method" type="hidden" value="PATCH">
+                </div>
+                <!--template bindings={}-->
+                <div class="form-group">
+                    <label for="tag">სიტყვა</label>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" id="tag" name="word" type="text" value="{{ItemData.word}}">
+                </div>
+                <div class="form-group">
+                    <label>ლინკი</label>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" id="link" name="link" type="text" value="{{ItemData.link}}">
+                </div>
+                <div class="form-group">
+                    <label>ლინკების მაქსიმალური რაოდენობა</label>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" id="max_number" name="max_number" type="text" value="{{ItemData.max_number}}">
+                </div>
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="open_new_tab" type="checkbox" [checked]="ItemData.open_new_tab">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">გაიხსნას ახალ ტაბზე</span>
+                    </label>
+                </div>
+                <div class="form-group mb-0">
+                    <button class="btn btn-primary" type="submit">
+                        შენახვა
+                    </button>
+                    <button class="btn btn-secondary" [routerLink]="['/anchors']" type="button">
+                        დაბრუნება
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>

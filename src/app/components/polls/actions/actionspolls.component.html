@@ -1,0 +1,49 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Polls / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+            <!-- <input name="_method" type="hidden" value="PATCH"> -->
+
+            <div class="form-group">
+                <label for="category_id">Title</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="title" value="{{ItemData.title}}">
+            </div>
+
+            <div class="form-group">
+                <label for="descirption">Answers</label>
+                <div class="answer-item row" *ngFor="let answer of ItemData.answers; let i = index;">
+                    <div class="col-md-9">
+                        <input type="hidden" name="answer_id" value="{{answer.id}}">
+                        <input class="form-control ng-untouched ng-pristine ng-valid" name="answer_title" value="{{answer.title}}">
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-secondary" (click)="removeAnswer(i)">remove</a>
+                    </div>
+                </div>
+                <div class="add-answer-box">
+                    <a class="btn btn-secondary" (click)="addAnswer()">add answer</a>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    ShortCode
+                </label>
+                <input class="form-control ng-untouched " style="cursor: text;" disabled value='[type="poll" id="{{ItemData.id}}"]'>
+            </div>
+
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/polls']" type="button">
+                    Go Back
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

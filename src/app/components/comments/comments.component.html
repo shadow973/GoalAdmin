@@ -1,0 +1,43 @@
+<div class="page-header">
+    <h1 _ngcontent-unf-43="">
+        Comments
+    </h1>
+    <div class="page-actions ml-auto">
+        <button *ngIf="chelectedItems.length > 0" class="btn btn-primary btn--raised" (click)="deleteItems()">Delete</button>
+    </div>
+</div>
+<div class="listing-items js-sortable ui-sortable">
+    <!--template bindings={}-->
+    <div class="listing-item js-sortable-item" *ngFor="let item of ItemsData" data-item-id="20">
+        <div class="listing-item-col">            
+            <label class="custom-control custom-checkbox gallery-uploader__checkbox">
+                <input class="custom-control-input ng-untouched ng-pristine" name="is_draft" type="checkbox" (click)="selectItem($event , item.id)">                    
+                <span class="custom-control-indicator"></span>
+            </label>
+        </div>
+        <div class="listing-item__title">
+            {{item.article_title}}
+        </div>
+        <div class="listing-item__title">
+            {{item.user_first_name}} {{item.user_last_name}}
+            <br>
+            {{item.user_email}}
+        </div>
+        <div class="listing-item__title">
+            {{item.content}}
+        </div>
+        <div class="listing-item__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button" [routerLink]="['/comments/',  item.id ]">
+                    Edit
+                </button>
+                <button class="dropdown-item" type="button" (click)="delete(item.id)">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

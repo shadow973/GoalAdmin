@@ -1,0 +1,32 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Home Categories / Add
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveCategory($event)">
+            <div *ngIf="id != 'add'">
+                        <input name="_method" type="hidden" value="PATCH">
+            </div>
+            <div class="form-group">
+                <label for="category_id">Category</label>
+                <select class="form-control ng-untouched ng-pristine ng-valid" id="category_id" name="category_id">
+                    <option *ngFor="let c of CategoriesData" value="{{c.id}}"  [selected]="c.id == CategoryData.category_id">{{c.title}}</option>                   
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="color">Color</label>
+                <input class="form-control" name="color" id="color" type="text" value="{{CategoryData.color}}">
+            </div>
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary"  [routerLink]="['/home-categories/']" type="button">
+                    Go Back
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

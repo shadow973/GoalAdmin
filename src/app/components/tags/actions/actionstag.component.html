@@ -1,0 +1,57 @@
+<div>
+        <div class="page-header">
+            <h1>
+                Tags / {{ItemData.title}} / Edit
+            </h1>
+        </div>
+        <div class="block block--padded">
+            <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+                <div *ngIf="id != 'add'">
+                    <input name="_method" type="hidden" value="PATCH">
+                </div>
+                <!--template bindings={}-->
+                <div class="form-group">
+                    <label for="tag">Title</label>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" id="title" name="title" type="text" value="{{ItemData.title}}">
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <app-image-uploader _nghost-owx-27=""><div _ngcontent-owx-27="" class="image-uploader">
+        <div _ngcontent-owx-27="" class="material-icons image-uploader__bg">add_a_photo</div>
+        <input _ngcontent-owx-27="" name="image_new" type="file">
+        <div _ngcontent-owx-27="" class="image-uploader__image image" [ngStyle]="{ 'background-image': 'url(' + ItemData.image + ')'}"></div>
+    </div></app-image-uploader>
+                </div>
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="delete_image" type="checkbox">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Delete Image</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Background Image</label>
+                    <app-image-uploader _nghost-owx-27=""><div _ngcontent-owx-27="" class="image-uploader">
+        <div _ngcontent-owx-27="" class="material-icons image-uploader__bg">add_a_photo</div>
+        <input _ngcontent-owx-27="" name="background_image_new" type="file" >
+        <div _ngcontent-owx-27="" class="image-uploader__image image" [ngStyle]="{ 'background-image': 'url(' + ItemData.background_image + ')'}"></div>
+    </div></app-image-uploader>
+                </div>
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="delete_background_image" type="checkbox">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Delete Background Image</span>
+                    </label>
+                </div>
+                <div class="form-group mb-0">
+                    <button class="btn btn-primary" type="submit">
+                        Save
+                    </button>
+                    <button class="btn btn-secondary" routerlink="/tags" type="button">
+                        Go Back
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>

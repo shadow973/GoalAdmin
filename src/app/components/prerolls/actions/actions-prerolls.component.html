@@ -1,0 +1,50 @@
+<div>
+        <div class="page-header">
+            <h1>
+              პრეროლები / {{ItemData.name}} / რედაქტირება
+            </h1>
+        </div>
+        <div class="block block--padded">
+            <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+                <div *ngIf="id != 'add'">
+                    <input name="_method" type="hidden" value="PATCH">
+                </div>
+                <!--template bindings={}-->
+              <div class="form-group">
+                <label for="name">დასახელება</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="name" name="name" type="text" value="{{ItemData.name}}">
+              </div>
+              <div class="form-group">
+                <label>ვიდეოს ლინკი</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="video_url" name="video_url" type="text" value="{{ItemData.video_url}}">
+              </div>
+              <div class="form-group">
+                <label>პროცენტულობა</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="percentage" name="percentage" type="text" value="{{ItemData.percentage}}">
+              </div>
+                <div class="form-group">
+                    <label>Click tracking url</label>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" id="click_tracking_url" name="click_tracking_url" type="text" value="{{ItemData.click_tracking_url}}">
+                </div>
+                <div class="form-group">
+                    <label>Impression tracking url</label>
+                    <input class="form-control ng-untouched ng-pristine ng-valid" id="impression_tracking_url" name="impression_tracking_url" type="text" value="{{ItemData.impression_tracking_url}}">
+                </div>
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="is_active" type="checkbox" [checked]="ItemData.is_active">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">აქტიურია</span>
+                    </label>
+                </div>
+                <div class="form-group mb-0">
+                    <button class="btn btn-primary" type="submit">
+                        შენახვა
+                    </button>
+                    <button class="btn btn-secondary" [routerLink]="['/prerolls']" type="button">
+                        დაბრუნება
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>

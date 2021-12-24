@@ -1,0 +1,28 @@
+.PlayerRelative {
+    position: relative;
+    display: inline-block;
+    width:100%;
+}
+.PlayersDiv {
+    position:absolute;
+    background:#fff !important;
+    width:100%;
+    z-index:999;
+    box-shadow:0 3px 4px #ccc
+}
+.PlayersDiv .player-item {
+    display:inline-block;
+    width:100%;
+    padding:5px;
+    border:solid #ccc 1px;
+    border-bottom:none;
+    font-size:13px;
+}
+.PlayersDiv .player-item:hover {
+    cursor: pointer;
+    background:#448AFF;
+    color:#fff
+}
+.PlayersDiv .player-item:last-child {
+    border-bottom:solid #ccc 1px;
+}

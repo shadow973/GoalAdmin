@@ -1,0 +1,47 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Championat / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="name" value="{{ItemData.name}}">
+            </div>
+            <div class="form-group">
+                <label for="leagues">Leagues</label>
+                <ng-multiselect-dropdown [placeholder]="'Select League'" [data]="LeaguesData" [(ngModel)]="ItemData.league_id"
+                    [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                    [ngModelOptions]="{standalone: true}">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+                <ck-editor name="content" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
+            </div>
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select class="form-control ng-untouched ng-pristine ng-valid" id="priority" name="priority">
+                    <option *ngFor="let n of numbers" value="{{n}}" [selected]="ItemData.priority == n">{{n}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="custom-control custom-checkbox gallery-uploader__checkbox">
+                    <input class="custom-control-input ng-untouched ng-pristine ng-valid" name="menu" type="checkbox"
+                        [checked]="ItemData.menu">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Show In Menu?</span>
+                </label>
+            </div>
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/championats']" type="button">
+                    Go Back
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="page-header">
+    <h1>
+        Photo Gallery / Edit Album
+    </h1>
+</div>
+<div class="block block--padded">
+    <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+        <div *ngIf="id != 'add'">
+            <input name="_method" type="hidden" value="PATCH">
+        </div>
+
+        <input name="id" type="hidden" value="{{ItemData.id}}">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-control ng-untouched ng-pristine ng-valid" value="{{ItemData.title}}" id="title" name="title" type="text">
+        </div>
+        <div class="form-group">
+            <div class="gallery-item" *ngFor="let item of ItemData.gallery_items; let i = index">
+                <div class="gallery-item__container">
+                    <img src="//storage.goal.ge/{{item.filename}}">
+                </div>
+                <div class="gallery-item__actions">
+                    <button class="gallery-item__action gallery-item__action--delete" (click)="deleteGalleryItem(i)" type="button">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="categories">Categories</label>
+            <ng-multiselect-dropdown [placeholder]="'custom placeholder'" [data]="CategoriesData" [(ngModel)]="ItemData.categories" [settings]="dropdownSettingsCats"
+                (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [ngModelOptions]="{standalone: true}">
+            </ng-multiselect-dropdown>
+        </div>
+
+        <div class="form-group">
+            <div class="album-uploader">
+                <div class="d-flex">
+                    <input accept="image/*" class="form-control album-uploader__file" multiple="" name="file" type="file">
+                    <button class="btn btn-primary album-uploader__upload-btn" type="button" (click)="uploadGalleryItem($event)">Upload</button>
+                    <button class="btn btn-secondary album-uploader__upload-btn" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>
+                Visibility
+            </label>
+            <br>
+            <select name="visibility" class="form-control ng-untouched ng-pristine ng-valid">
+                <option value="1" [selected]="ItemData.visibility == 1">Visible</option>
+                <option value="0" [selected]="ItemData.visibility == 0">Not Visible</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>
+                ShortCode
+            </label>
+            <input class="form-control ng-untouched " style="cursor: text;" disabled value='[type="album" id="{{ItemData.id}}"]'>
+        </div>
+        <div class="form-group mb-0">
+            <button class="btn btn-primary" type="submit">
+                Save Changes
+            </button>
+            <button class="btn btn-secondary" routerlink="/albums" type="button">
+                Go Back
+            </button>
+        </div>
+    </form>
+</div>

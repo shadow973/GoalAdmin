@@ -1,0 +1,32 @@
+<div class="page-header">
+    <h1>
+        TV Programs
+    </h1>
+    <div class="page-actions ml-auto">
+        <button class="btn btn-primary btn--raised" routerlink="/tv-programs/add">Add TV Program</button>
+    </div>
+</div>
+<div class="tv-programs">
+    <div class="tv-program" data-item-id="" *ngFor="let item of TVProgramsData">
+        <div class="tv-program__image"></div>
+        <div class="tv-program__channel">
+            {{item}}
+        </div>
+        <div class="tv-program__date">
+            2018-10-01
+        </div>
+        <div class="tv-program__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button">
+                    Edit
+                </button>
+                <button class="dropdown-item" type="button">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

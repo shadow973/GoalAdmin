@@ -1,0 +1,61 @@
+<div class="page-header">
+    <h1>
+        Tags
+    </h1>
+    <div class="page-actions ml-auto">
+        <div class="btn-group">
+            <a style="margin-right:5px;" href="//api.setanta.ge/api/tags/export">
+                <button class="btn btn-primary">Export</button>
+            </a>
+            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
+              Sort by: Title
+              </button>
+            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item">Title</button>
+                <button class="dropdown-item">Article Count</button>
+            </div>
+        </div>
+        <button class="btn btn-primary btn--raised" [routerLink]="['/tags/add']">Add Tag</button>
+    </div>
+</div>
+<div class="tags">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <th>Articles Count</th>
+                <th>Users Count</th>
+                <th>action</th>
+            </tr>
+            <!--template bindings={}-->
+            <tr class="tag" *ngFor="let tag of TagsData">
+                <td width="70%">
+                    <div class="tag__title">
+                        {{tag.title}}
+                    </div>
+                </td>
+                <td width="10%">
+                    {{tag.articles_count}}
+                </td>
+                <td width="10%">
+                    {{tag.users_count}}
+                </td>
+                <td width="10%">
+                    <div class="tag__actions">
+                        <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                       <i class="material-icons">more_vert</i>
+                       </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button" [routerLink]="['/tags/',  tag.id ]">
+                          Edit
+                          </button>
+                            <button class="dropdown-item" type="button">
+                          Delete
+                          </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

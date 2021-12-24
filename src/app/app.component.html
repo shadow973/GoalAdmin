@@ -1,0 +1,15 @@
+<div class="app-secure" *ngIf="router.url != '/'">        
+        <header class="app-header">
+            <header-component></header-component>
+        </header>
+        <div class="app-sidebar">            
+            <sidebar-component></sidebar-component> 
+        </div>
+        <div class="app-content content" >
+                <router-outlet></router-outlet>
+        </div> 
+</div>
+
+<div class="app-secure" *ngIf="router.url == '/'"> 
+    <login-component></login-component>
+</div>

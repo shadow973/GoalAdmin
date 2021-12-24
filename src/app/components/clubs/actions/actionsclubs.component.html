@@ -1,0 +1,48 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Club / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="name" value="{{ItemData.name}}">
+            </div>
+
+            <div class="form-group PlayerRelative">
+                <label for="category_id">Team <span style="display:none">{{ItemData.team_name}}</span></label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" type="text" value="{{ItemData.team_name}}"
+                    (keyup)="searchTeam($event)">
+                <div *ngIf="TeamsData.length" class="PlayersDiv">
+                    <div class="player-item" *ngFor="let pl of TeamsData" (click)="selectTeam(pl.team_id, pl.name)">{{pl.name}}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <ck-editor name="content" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
+            </div>            
+            <div class="form-group">
+                <label>Image </label>
+                <app-image-uploader>
+                    <div class="image-uploader">
+                        <div class="material-icons image-uploader__bg">add_a_photo</div>
+                        <input name="image_new" type="file">
+                        <div class="image-uploader__image image" [ngStyle]="{ 'background-image': 'url(' + ItemData.bck_image + ')'}"></div>
+                    </div>
+                </app-image-uploader>
+            </div>
+            <div class="form-group">
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="image" value="{{ItemData.image}}">
+            </div>
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/clubs']" type="button">
+                    Go Back
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="page-header">
+    <h1 _ngcontent-unf-43="">
+        Polls
+    </h1>
+    <div class="page-actions ml-auto">
+        <button class="btn btn-primary btn--raised" [routerLink]="['/polls/add']">Add New</button>
+    </div>
+</div>
+<div class="listing-items js-sortable ui-sortable">
+    <!--template bindings={}-->
+    <div class="listing-item js-sortable-item" *ngFor="let item of ItemsData" data-item-id="20">
+        <div class="listing-item__title">
+            {{item.title}}
+        </div>
+        <div class="listing-item__actions">
+            <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button" [routerLink]="['/polls/',  item.id ]">
+                    Edit
+                </button>
+                <button class="dropdown-item" type="button">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

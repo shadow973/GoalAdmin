@@ -1,0 +1,59 @@
+<div class="page-header">
+    <h1>
+      <a [routerLink]="['/transfer-seasons/']">სატრანსფერო სეზონები</a> / {{ season.name }}
+    </h1>
+    <div class="page-actions ml-auto">
+        <!--<div class="btn-group">
+            <button aria-expanded="false" aria-haspopup="true" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">
+              Sort by: Title
+              </button>
+            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item">Title</button>
+                <button class="dropdown-item">Article Count</button>
+            </div>
+        </div>-->
+        <button class="btn btn-primary btn--raised" [routerLink]="['/transfer-seasons/'+season.id+'/transfers/add']">დამატება</button>
+    </div>
+</div>
+<div class="tags">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>დასახელება</th>
+                <th>გუნდი (საიდან გადავიდა)</th>
+                <th>გუნდი (სად გადავიდა)</th>
+                <th>ტრანსფერის ფასი</th>
+            </tr>
+            <!--template bindings={}-->
+            <tr class="tag" *ngFor="let tag of ItemData.data">
+              <td width="20%">
+                {{tag.player.common_name}}
+              </td>
+              <td width="20%">
+                {{tag.from_team.name}}
+              </td>
+              <td width="20%">
+                {{tag.to_team.name}}
+              </td>
+              <td width="20%">
+                {{tag.transfer_price}}
+              </td>
+                <td width="10%">
+                    <div class="tag__actions">
+                        <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+                       <i class="material-icons">more_vert</i>
+                       </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button" [routerLink]="['/transfer-seasons/'+seasonId+'/transfers/',  tag.id ]">
+                          რედაქტირება
+                          </button>
+                            <button class="dropdown-item" type="button" (click)="deleteItem(tag)">
+                          წაშლა
+                          </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

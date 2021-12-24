@@ -1,0 +1,34 @@
+<div>
+    <div class="page-header">
+        <h1>
+            Player / Edit
+        </h1>
+    </div>
+    <div class="block block--padded">
+        <form class="ng-untouched ng-pristine ng-valid" (submit)="saveItem($event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" name="name" value="{{ItemData.name}}">
+            </div>
+            <div class="form-group PlayerRelative">
+                <label for="category_id">Player</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" type="text" value="{{ItemData.player_name}}"
+                    (keyup)="searchPlayer($event)">
+                <div *ngIf="PlayersData.length" class="PlayersDiv">
+                    <div class="player-item" *ngFor="let pl of PlayersData" (click)="selectPlayer(pl.player_id,pl.fullname)">{{pl.fullname}}</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <ck-editor name="content" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
+            </div>
+            <div class="form-group mb-0">
+                <button class="btn btn-primary" type="submit">
+                    Save
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/players']" type="button">
+                    Go Back
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="page-header">
+    <h1>
+        Articles
+    </h1>
+    <div class="page-actions ml-auto">
+        <div class="btn-group">
+            <select class="form-control ng-untouched ng-pristine ng-valid" id="input_article_type" name="article_sort" (change)="sortChange($event)">
+             <option  value="publish_date">Sort by: Publish Date</option>
+            <option  value="views">Sort by: Page View</option>
+         </select>
+        </div>
+        <button class="btn btn-primary btn--raised" [routerLink]="['/articles/add']">Add Article</button>
+    </div>
+</div>
+<form class="filters ng-untouched ng-pristine ng-valid" #form (submit)="Filter($event)">
+    <div class="form-group">
+        <div class="row">
+            <div class="col col-12">
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="input_q" name="q" placeholder="Search..." type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col col-6">
+                <label for="input_user_id">Author</label>
+                <select class="form-control select2-users select2-hidden-accessible ng-untouched ng-pristine ng-valid" id="input_user_id" name="user_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                <option  value="">Choose a user</option>
+             </select>
+                <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-input_user_id-container"><span class="select2-selection__rendered" id="select2-input_user_id-container"><span class="select2-selection__placeholder">Choose an author</span></span>
+                <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
+                </span>
+                </span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            </div>
+            <div class="col col-6">
+                <label for="input_category_id">Category</label>
+                <select class="form-control" id="input_category_id" name="category_id" style="width: 100%;" tabindex="-1" aria-hidden="true">
+
+                    <option *ngFor="let c of CategoriesData" value="{{c.id}}">{{c.title}}</option>
+             </select>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col col-6">
+                <label for="publish_date">Calendar</label>
+                <input class="form-control ng-untouched ng-pristine ng-valid" id="publish_date" name="date" placeholder="Date..." type="text">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input #filterButton class="btn btn-secondary" name="submit" type="submit" value="Filter">
+    </div>
+</form>
+<nav class="d-flex justify-content-center mt-4">
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+    </ul>
+</nav>
+<div class="articles">
+
+    <app-article *ngFor="let article of ArticlesData.data">
+        <div class="article">
+            <a class="article__title" [routerLink]="['/articles/',  article.id ]">
+          {{article.title}}
+          </a>
+            <div class="article__category">
+                <span *ngFor="let cat of article.categories">
+                {{ cat.title }}<span>,</span>
+                </span>
+            </div>
+            <div class="article__views d-flex align-items-center">
+                <div class="material-icons mr-2 text-muted">remove_red_eye</div>
+                {{ article.views }}
+            </div>
+            <div class="article__views d-flex align-items-center">
+                <div class="material-icons mr-2 text-muted">person</div>
+                {{ article.hasOwnProperty('author')?article.author.first_name:'' }} {{ article.hasOwnProperty('author')?article.author.last_name:'' }}
+            </div>
+            <div class="article__actions">
+                <a class="btn btn--transparent btn--flex mr-2" target="_blank" href="{{Frontend_url}}news/{{article.id}}/{{article.slug}}">
+                    <i class="material-icons">open_in_new</i>
+                </a>
+                <button class="btn btn--transparent btn--flex" data-toggle="dropdown" type="button" (click)="activeActions($event)">
+             <i class="material-icons">more_vert</i>
+             </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button" [routerLink]="['/articles/',  article.id ]">
+                Edit
+                </button>
+                    <button class="dropdown-item" type="button" (click)="delete(article.id)">
+                Delete
+                </button>
+                </div>
+            </div>
+        </div>
+    </app-article>
+</div>
+<app-pagination>
+    <nav class="d-flex justify-content-center mt-4">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)">Last</a>
+            </li>
+        </ul>
+    </nav>
+</app-pagination>
